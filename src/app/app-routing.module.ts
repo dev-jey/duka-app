@@ -12,14 +12,14 @@ const routes: Routes = [
       )
   },
   {
-    path: "admin",
+    path: "",
     loadChildren: () =>
       import("./_modules/admin/admin.module").then(
         m => m.AdminModule
       )
   },
   {
-    path: "store",
+    path: "",
     loadChildren: () =>
       import("./_modules/store/store.module").then(
         m => m.StoreModule

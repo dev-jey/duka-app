@@ -7,11 +7,13 @@ import { StoreModule } from './_modules/store/store.module';
 import { AdminModule } from './_modules/admin/admin.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
+import { NavbarComponent } from './_layout/home/navbar/navbar.component';
+import { HomeComponent } from './_layout/home/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, PageNotFoundComponent
+    AppComponent, PageNotFoundComponent, NavbarComponent, HomeComponent
   ],
   imports: [
     BrowserModule,
