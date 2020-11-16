@@ -1,11 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+$myFont: Helvetica, sans-serif;
+$myColor: #FF3A18;
+$myFontSize: 18px;
+$myWidth: 680px;
+
 html{
     text-rendering: optimizeLegibility;
-    font-family: 'Lato', sans-serif;
     font-family: 'Oswald', sans-serif;
 }
 
 a{
     text-decoration: none;
     color: inherit;
+}
+.container{
+    margin: 0 auto;
+    padding: .75rem 1.3rem;
+    max-width: 1180px;
+    width: 100%;
+}
+body{
+    background: url(assets/images/bg.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;background-position-y: center;
+    height: 100%;
+}
+.btn{
+    padding: 2% 4%;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    background: $myColor;
 }

@@ -1,0 +1,44 @@
+$myColor: #FF3A18;
+
+.login__form{
+    width: 320px;
+    text-align: center;
+    & input[type=email], & input[type=password]{
+        border: none;
+        outline: none;
+        border: solid 1px $myColor;
+        height: 40px;
+        width: 90%;
+        border-radius: 50px;
+        margin: .5rem;
+        padding: 0rem 1rem;
+        transition: .2s ease-in-out;
+    }
+    &-btn{
+        cursor: pointer;
+        background-color: $myColor;
+        color: #fff;
+        height: 40px;
+        width: 100%; margin: .5rem;
+        padding: 0rem 1rem !important;
+        font-family: 'Lato', sans-serif;
+    }
+    &-btn:hover{
+        background-color: #FFF6DA;
+        color: $myColor;
+        border: $myColor 1px solid;
+        box-sizing: border-box;
+        transition: .2s ease-in-out;
+    }
+    p{
+        color: rgb(66, 66, 66);
+        font-family: 'Lato', sans-serif;
+        font-weight: bolder;
+        font-size: .75rem;
+    }
+}
+.login-container{
+    display: grid;
+    height: calc(100vh - 100px);
+    place-items: center;
+}
