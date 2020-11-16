@@ -10,13 +10,13 @@
             <input type="email" name="email" placeholder="Email" id="email" formControlName="email" >
         </div>
         <div class="error-message" *ngIf="loginForm.controls['email'].errors && loginFormSubmitted">
-        {{authenticationErrors.required}}
+        *{{authenticationErrors.required}}
         </div>
         <div class="login__form-attr">
             <input type="password" name="password" placeholder="Password" id="password" formControlName="password">
         </div>
         <div class="error-message" *ngIf="loginForm.controls['password'].errors && loginFormSubmitted">
-            {{authenticationErrors.required}}
+            *{{authenticationErrors.required}}
             </div>
         <div class="login__form-attr">
             <input type="submit" name="login" class="btn login__form-btn" value="LOGIN" [disabled]="loginFormSpinner">

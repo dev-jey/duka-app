@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           this.loginFormSubmitted = false;
           this.loginFormSpinner = false;
 
-          this.router.navigate(["dashboard"]);
+          this.router.navigate(["shop"]);
 
           //unsubscribe
           if (sub) {
