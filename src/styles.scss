@@ -33,3 +33,7 @@ body{
     color: #fff;
     background: $myColor;
 }
+input[type="submit"]:disabled {
+    background: #dddddd;
+    cursor: progress;
+  }

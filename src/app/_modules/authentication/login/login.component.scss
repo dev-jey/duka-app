@@ -42,3 +42,16 @@ $myColor: #FF3A18;
     height: calc(100vh - 100px);
     place-items: center;
 }
+.api-error{
+    color: $myColor;
+    img{
+        width: 12px;
+    }
+}
+.error-message{
+    color: $myColor;
+    text-align: left;
+    font-size: .5rem;
+    margin-left: 20px;
+    margin-top: -5px;
+}

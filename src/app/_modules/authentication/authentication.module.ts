@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -10,7 +11,9 @@ import { AuthenticationRoutingModule } from "./authentication-routing.module";
   declarations: [LoginComponent, WelcomeComponent],
   imports: [
     CommonModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AuthenticationModule { }

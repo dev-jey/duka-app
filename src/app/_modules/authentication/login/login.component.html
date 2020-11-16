@@ -1,16 +1,26 @@
 <div class="login-container">
-    <form action="" class="login__form">
+    <form action="" class="login__form" (submit)="login()" [formGroup]="loginForm">
         <img src="../../../../assets/images/cart.svg" width="150"/>
         <h2>Login</h2>
+        <div class="api-error"  *ngIf="loginFormApiError.hasError">
+           <img src="../../../../assets/images/alert.svg" alt=""> {{loginFormApiError.message}}
+        </div>
         <p>Enter your email and password to access your account and manage your shop</p>
         <div class="login__form-attr">
-            <input type="email" name="email" placeholder="Email">
+            <input type="email" name="email" placeholder="Email" id="email" formControlName="email" >
+        </div>
+        <div class="error-message" *ngIf="loginForm.controls['email'].errors && loginFormSubmitted">
+        {{authenticationErrors.required}}
         </div>
         <div class="login__form-attr">
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" id="password" formControlName="password">
         </div>
+        <div class="error-message" *ngIf="loginForm.controls['password'].errors && loginFormSubmitted">
+            {{authenticationErrors.required}}
+            </div>
         <div class="login__form-attr">
-            <input type="submit" name="login" class="btn login__form-btn" value="LOGIN">
+            <input type="submit" name="login" class="btn login__form-btn" value="LOGIN" [disabled]="loginFormSpinner">
+            <img src="../../../../assets/images/spinner.svg" width="20" height="20" *ngIf="loginFormSpinner"/>
         </div>
     </form>
 </div>

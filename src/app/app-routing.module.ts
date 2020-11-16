@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
+import { NotFoundComponent } from './_modules/errors/not-found/not-found.component';
+import { ServerErrorComponent } from './_modules/errors/server-error/server-error.component';
 
 const routes: Routes = [
   {
@@ -18,9 +19,19 @@ const routes: Routes = [
       )
   },
   {
+    path: "error/500",
+    component: ServerErrorComponent,
+    children: [{ path: "", component: ServerErrorComponent }]
+  },
+  {
+    path: "error/404",
+    component: NotFoundComponent,
+    children: [{ path: "", component: NotFoundComponent }]
+  },
+  {
     path: "**",
-    component: PageNotFoundComponent,
-    children: [{ path: "404", component: PageNotFoundComponent }]
+    component: NotFoundComponent,
+    children: [{ path: "", component: NotFoundComponent }]
   }
 ];
 
