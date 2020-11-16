@@ -2,6 +2,7 @@ $myColor: #FF3A18;
 .main{
     display: grid;
     grid-template-columns: 50% 50%;
+    gap: 1.5rem;
     margin-top: 50px;
     align-items: center;
     &__left{
@@ -11,7 +12,6 @@ $myColor: #FF3A18;
             background: #fff;
             padding: 1.2rem 1rem;
             border-radius: 10px;
-            width: 700px;
             font-family: 'Lato', sans-serif;
             color: rgb(66, 66, 66);
             font-size: .9rem;
