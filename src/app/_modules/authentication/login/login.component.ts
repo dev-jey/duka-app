@@ -26,11 +26,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //prevent logged in user from accessing login page
-    if (this.router.url === "/") {
-      const userToken = localStorage.getItem("token");
-      if (userToken) {
-        this.router.navigate(["/dashboard"]);
-      }
+    const userToken = localStorage.getItem("token");
+    if (userToken) {
+      this.router.navigate(["/shop"]);
     }
 
     //initialize login form

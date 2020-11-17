@@ -32,7 +32,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     return throwError(err);
   }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const currentUser: any = localStorage.getItem('mediclaimUserToken');
+    const currentUser: any = localStorage.getItem('token');
     if (currentUser) {
       this.token = currentUser;
       request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + this.token) });

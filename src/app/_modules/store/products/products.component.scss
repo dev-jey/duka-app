@@ -1,0 +1,31 @@
+$myColor: #FF3A18;
+.main{
+    display: grid;
+    place-items: center;
+    margin-top: 50px;
+    & .search{
+        position: relative;
+    }
+    input{
+        height: 40px;
+        outline: none;
+        border: 1px solid $myColor;
+    }
+    input[type=text]{
+        width: 450px;
+        padding: 0rem 1rem;
+        padding-right: 10rem;
+        border-radius: 50px;
+    }
+    input[type=submit]{
+        width: 150px;
+        height: 44px;
+        position: absolute;
+        border-radius: 50px;
+        right: 0;
+        top: 0;
+        background-color: $myColor;
+        cursor: pointer;
+        color: #fff;
+    }
+}

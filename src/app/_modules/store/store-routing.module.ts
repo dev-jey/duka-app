@@ -1,17 +1,20 @@
 
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from 'src/app/_layout/home/home.component';
+import { StoreComponent } from 'src/app/_layout/store/store.component';
+import { RouteProtectService } from 'src/app/_services/shared/route-protect.service';
 import { ProductsComponent } from './products/products.component';
+
 
 
 const routes: Routes = [
   {
     path: "shop",
-    component: HomeComponent,
+    component: StoreComponent,
     children: [
         { path: "", component: ProductsComponent },
-    ]
+    ],
+    canActivate: [RouteProtectService]
   },
 
 ];
