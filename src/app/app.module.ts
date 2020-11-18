@@ -13,11 +13,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './_services/shared/http-interceptor.service';
 import { NotFoundComponent } from './_modules/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './_modules/errors/server-error/server-error.component';
+import { ForbiddenComponent } from './_modules/errors/forbidden/forbidden.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent, HomeComponent, NotFoundComponent, ServerErrorComponent
+    AppComponent, NavbarComponent, HomeComponent, NotFoundComponent, ServerErrorComponent, ForbiddenComponent
   ],
   imports: [
     BrowserModule,

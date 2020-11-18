@@ -22,9 +22,9 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
   handleError(err: HttpErrorResponse) {
     if (err instanceof HttpErrorResponse) {
-        if (err.status === 404) {
-            this.router.navigateByUrl('/error/404');
-        }
+      if (err.status === 403) {
+        this.router.navigateByUrl('/error/forbidden');
+    }
         if(err.status === 500){
             this.router.navigateByUrl('/error/500');
         }

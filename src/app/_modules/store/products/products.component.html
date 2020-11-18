@@ -1,8 +1,29 @@
+<header>
+    <nav class="navbar">
+        <div class="navbar__left">
+            <a routerLink="/">DukaShop</a>
+        </div>
+        <div class="navbar__right">
+            <a routerLink="/cart" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
+            </a>
+            <a routerLink="/contact" class="navbar__right-profile">
+                <img src="../../../../assets/images/profile.svg" alt="" width="16">
+
+                <div class="profile-dropdown animate__animated animate__fadeInLeft ">
+                    <button>Logout</button>
+                </div>
+            </a>
+        </div>
+    </nav>
+</header>
 <div class="main">
     <br>
     <div class="search">
         <form action="">
-            <input type="text" name="search" class="search-input field" id="search" placeholder="Search by product name or product code">
+            <input type="text" name="search" class="search-input field" id="search"
+                placeholder="Search by product name or product code">
             <input type="submit" value="Search" class="search-input query">
         </form>
     </div>
@@ -12,6 +33,9 @@
             <br>
             <div class="products-list">
                 <div class="product product-header">
+                    <div class="number">
+                        #
+                    </div>
                     <div class="title">
                         Product Title
                     </div>
@@ -34,259 +58,50 @@
                         Action
                     </div>
                 </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
+                <div>
+                    <img src="../../../../assets/images/spinner.svg" width="50" height="50" *ngIf="prodFormSpinner" />
                 </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
+
+                <div class="no-prods" *ngIf="prodFormApiError.hasError">
+                    <img src="../../../../assets/images/alert.svg" alt=""> {{prodFormApiError.message}}
                 </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
+                <div *ngIf="!prodFormApiError.hasError">
+                    <form class="product" *ngFor="let p of products; let i =index" (submit)="addToCart($event, p.id)"
+                        [formGroup]="prodForm">
+                        <div>{{i+1}}</div>
+                        <div class="title">
+                            {{p.title}}
+                        </div>
+                        <div class="price">
+                            {{p.price}}
+                        </div>
+                        <div class="category">
+                            {{p.category}}
+                        </div>
+                        <div class="in-stock">
+                            {{p.quantity}}
+                        </div>
+                        <div class="description">
+                            {{p.description}}
+                        </div>
+                        <div class="quantity">
+                            <input type="number" name="quantity" id="quantity" formControlName="quantity" />
+                            <div class="error-message"
+                                *ngIf="prodForm.controls['quantity'].errors && prodFormSubmitted">
+                                *{{prodErrors.required}}
+                            </div>
+                        </div>
+                        <div class="sell">
+                            <input type="submit" value="Add to Cart" [disabled]="prodCartFormSpinner"
+                               />
+                            <div *ngIf="prodCartFormSpinner">
+                                <img src="../../../../assets/images/spinner.svg" width="20" height="20" />Adding....
+                            </div>
+                            <p *ngIf="!prodFormApiError.hasError">{{response}}</p>
+                        </div>
+                    </form>
                 </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="title">
-                        Mkate
-                    </div>
-                    <div class="price">
-                        Ksh.50
-                    </div>
-                    <div class="category">
-                        Food
-                    </div>
-                    <div class="in-stock">
-                        200
-                    </div>
-                    <div class="description">
-                        Bread is sweet for breakfast
-                    </div>
-                    <div class="quantity">
-                        <input type="text" name="quantity" id="quantity" value="20"/>
-                    </div>
-                    <div class="sell">
-                        <input type="submit" value="Add to Cart" />
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="products-updates">

@@ -38,3 +38,7 @@ input[type="submit"]:disabled {
     background: #dddddd;
     cursor: progress;
   }
+  input[type="submit"]:disabled:hover {
+    background: #dddddd;
+    cursor: not-allowed;
+  }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ForbiddenComponent } from './_modules/errors/forbidden/forbidden.component';
 import { NotFoundComponent } from './_modules/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './_modules/errors/server-error/server-error.component';
 
@@ -24,9 +25,9 @@ const routes: Routes = [
     children: [{ path: "", component: ServerErrorComponent }]
   },
   {
-    path: "error/404",
-    component: NotFoundComponent,
-    children: [{ path: "", component: NotFoundComponent }]
+    path: "error/forbidden",
+    component: ForbiddenComponent,
+    children: [{ path: "", component: ForbiddenComponent }]
   },
   {
     path: "**",

@@ -31,7 +31,7 @@ $myColor: #ff3a18;
     & .products {
         display: grid;
         grid-template-columns: 75% 25%;
-        gap: .1rem;
+        gap: 0.1rem;
         width: 100%;
         margin-top: 50px;
         &-favorites {
@@ -64,13 +64,13 @@ $myColor: #ff3a18;
         }
         & .product {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(8, 1fr);
             gap: 0.5rem;
             border: 1px solid rgb(238, 238, 238);
             padding: 1rem;
             background-color: #fff;
-            font-family: 'Lato', sans-serif;
-            font-size: .85rem;
+            font-family: "Lato", sans-serif;
+            font-size: 0.85rem;
             & .quantity {
                 display: grid;
                 place-items: center;
@@ -88,7 +88,7 @@ $myColor: #ff3a18;
                     border-radius: 50px;
                     border: none;
                     padding: 0.5rem 1rem;
-                    font-size: .75rem;
+                    font-size: 0.75rem;
                     color: #fff;
                     cursor: pointer;
                     outline: none;
@@ -107,9 +107,82 @@ $myColor: #ff3a18;
             top: 0;
             background-color: inherit;
             background: #fff;
-            font-size: .90rem;
+            font-size: 0.9rem;
             border: solid 1px rgb(228, 228, 228);
             font-weight: bolder;
+        }
+    }
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    &__left {
+        & a {
+            font-size: 1.5rem;
+            color: $myColor;
+        }
+        & a:hover {
+            color: #000;
+            transition: 0.2s ease-in-out;
+        }
+    }
+    &__right {
+        text-align: right;
+        display: flex;
+        margin-left: auto;
+        justify-items: end;
+        a {
+            padding: 0.5rem 1rem;
+            font-family: "Lato", sans-serif;
+            font-size: 0.85rem;
+        }
+        a:hover {
+            background-color: #fff6da;
+            border-radius: 5px;
+            // padding: .5rem 1rem;
+            transition: 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        &-cart {
+            display: flex;
+        }
+        .profile-dropdown {
+            display: none;
+            background-color: #fff6da;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-bottom: -35px;
+            width: 200px;
+            border-radius: 2px;
+            text-align: left;
+            button {
+                color: #000;
+                outline: none;
+                background: none;
+                border: none;
+                cursor: pointer;
+                margin: 0.5rem;
+            }
+        }
+        &-profile {
+            display: flex;
+            position: relative;
+            &:hover .profile-dropdown {
+                display: block;
+            }
+        }
+
+        .cart-length {
+            color: #fff;
+            background: $myColor;
+            border-radius: 50px;
+            width: 12px;
+            height: 12px;
+            font-size: .4rem;
+            text-align: center;
         }
     }
 }
