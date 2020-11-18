@@ -22,7 +22,8 @@ a{
 body{
     background: url(assets/images/bg.svg);
     background-repeat: no-repeat;
-    background-size: 100%;background-position-y: center;
+    background-size: cover;
+    background-position-y: center;
     height: 100%;
 }
 .btn{

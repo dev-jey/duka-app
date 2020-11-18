@@ -4,8 +4,18 @@
             <a routerLink="/">DukaShop</a>
         </div>
         <div class="navbar__right">
-            <a routerLink="/cart">Cart</a>
-            <a routerLink="/contact">{{name}}</a>
+            <a routerLink="/cart" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                Cart
+            </a>
+            <a routerLink="/contact" class="navbar__right-profile">
+                <img src="../../../../assets/images/profile.svg" alt="" width="16">&nbsp;
+                {{name}}
+
+                <div class="profile-dropdown">
+                    <button>Logout</button>
+                </div>
+            </a>
         </div>
     </nav>
 </header>
