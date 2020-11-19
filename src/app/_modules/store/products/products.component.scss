@@ -28,6 +28,9 @@ $myColor: #ff3a18;
         cursor: pointer;
         color: #fff;
     }
+    .query:hover{
+        background: rgba(255, 0, 0, 0.738);
+    }
     & .products {
         display: grid;
         grid-template-columns: 75% 25%;
@@ -73,11 +76,20 @@ $myColor: #ff3a18;
             font-size: 0.85rem;
             & .quantity {
                 display: grid;
-                place-items: center;
+                grid-template-columns: 1fr 2fr 1fr;
+                gap: .5rem;
                 input {
                     width: 50px;
                     text-align: center;
                     height: 26px;
+                    border: none;
+                    border: 1px solid silver;
+                }
+                input[type=image]{
+                    border-radius: 50px;
+                    height: 20px;
+                    align-items: center;
+                    width: 20px;
                 }
             }
             & .sell {
@@ -94,9 +106,8 @@ $myColor: #ff3a18;
                     outline: none;
                 }
                 input:hover {
-                    color: $myColor;
-                    border: 1px solid $myColor;
-                    background: #fff;
+                    color: #fff;
+                    background: rgba(255, 0, 0, 0.738);
                     transition: 0.2s ease-in-out;
                 }
             }
@@ -185,4 +196,18 @@ $myColor: #ff3a18;
             text-align: center;
         }
     }
+}
+
+.error-message{
+    color: $myColor;
+    font-size: .5rem;
+    text-align: center;
+}
+
+.loading-header{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr !important;
+    width:100%;
+    background-color: $myColor;
 }

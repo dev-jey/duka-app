@@ -9,9 +9,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  prodForm: FormGroup;
   prodFormSpinner: Boolean;
-  prodCartFormSpinner:Boolean;
+  prodCartFormSpinner: Boolean;
   prodFormApiError: any;
   prodFormSubmitted: Boolean;
   prodErrors = {
@@ -19,19 +18,17 @@ export class ProductsComponent implements OnInit {
   };
   products: Array<any> = []
   cartLength: number = 0
-  response:String = ''
+  response: String = ''
+  prodQuantity:number[]=[];
+  current: any = { id: null };
 
   constructor(
-    private prodService: ProductsService,
-    private fb: FormBuilder,) { }
+    private prodService: ProductsService
+  ) { }
 
   ngOnInit(): void {
     this.getProducts()
     this.getCart()
-
-  
-    //initialize login form
-    this.initprodForm();
 
     //initialize default values
     this.prodFormSpinner = false;
@@ -40,17 +37,28 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  /**
-   * prod form initialization
-   */
-  initprodForm() {
-    this.prodForm = this.fb.group({
-      quantity: [null, Validators.required]
-    });
+  onForm2NameChange({ target }, i) {
+    this.prodQuantity[i] = target.value;
+  }
+
+  addQuantity(e, quantity, i) {
+    e.preventDefault()
+    console.log(i)
+    if (this.prodQuantity[i] < quantity) {
+      this.prodQuantity[i] += 1
+    }
+    console.log(this.prodQuantity)
+  }
+
+  subQuantity(e, i) {
+    e.preventDefault()
+    if (this.prodQuantity[i] > 1) {
+      this.prodQuantity[i] -= 1
+    }
   }
 
 
-  getCart(){
+  getCart() {
     this.prodFormSubmitted = true;
     this.prodFormApiError = { hasError: false, message: "" };
     this.prodService
@@ -59,20 +67,18 @@ export class ProductsComponent implements OnInit {
         resp => {
           this.cartLength = resp.Cart.length;
           this.prodFormSubmitted = false;
-          this.prodFormApiError = { hasError: false, message: "" };
-        }, 
+        },
         error => {
           const err = error.error.Message;
           console.log(err)
-          this.products = [];
           this.prodFormSubmitted = false;
-          this.prodFormApiError = { hasError: true, message: err };
         });
   }
 
 
 
   getProducts() {
+    this.prodQuantity = []
     this.prodFormSubmitted = true;
     this.prodFormApiError = { hasError: false, message: "" };
     this.prodFormSpinner = true;
@@ -80,11 +86,14 @@ export class ProductsComponent implements OnInit {
       .getProducts()
       .subscribe(
         resp => {
-          this.products = resp.products;
+          this.products = resp.products.sort((a,b) => a.title > b.title ? 1 : -1);
           this.prodFormSpinner = false;
           this.prodFormSubmitted = false;
           this.prodFormApiError = { hasError: false, message: "" };
-        }, 
+          this.products.forEach(product =>{
+            this.prodQuantity.push(1)
+          })
+        },
         error => {
           const err = error.error.Message;
           console.log(err)
@@ -95,16 +104,14 @@ export class ProductsComponent implements OnInit {
         });
   }
 
-  addToCart(e, id) {
+
+  addToCart(e, id, i) {
     e.preventDefault()
+    this.current = this.products.filter(item => item.id == id)[0];
     this.prodFormSubmitted = true;
     this.prodFormApiError = { hasError: false, message: "" };
-    if (this.prodForm.invalid) {
-      return;
-    }
     this.prodCartFormSpinner = true;
-    const {quantity} = this.prodForm.value
-    const subData = {quantity: `${quantity}`, id:`${id}`}
+    const subData = { quantity: `${this.prodQuantity[i]}`, id: `${id}` }
     this.prodService
       .addToCart(subData)
       .subscribe(
@@ -114,13 +121,15 @@ export class ProductsComponent implements OnInit {
           this.prodCartFormSpinner = false;
           this.response = resp.Message;
           this.getCart()
-        }, 
-        error=>{
+          this.getProducts()
+        },
+        error => {
           console.log(error)
           this.prodFormSubmitted = false;
           this.prodFormApiError = { hasError: true, message: "" };
           this.prodCartFormSpinner = false;
           this.getCart()
+          this.getProducts()
         });
   }
 

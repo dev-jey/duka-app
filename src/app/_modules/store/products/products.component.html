@@ -32,7 +32,7 @@
             <h3>Popular Products</h3>
             <br>
             <div class="products-list">
-                <div class="product product-header">
+                <div class="product product-header" *ngIf="!prodFormSpinner">
                     <div class="number">
                         #
                     </div>
@@ -58,16 +58,17 @@
                         Action
                     </div>
                 </div>
-                <div>
-                    <img src="../../../../assets/images/spinner.svg" width="50" height="50" *ngIf="prodFormSpinner" />
+
+                <div class="product product-header loading-header"  *ngIf="prodFormSpinner">
+                    <div><img src="../../../../assets/images/spinner.svg" width="15" height="15" />Updating Table...</div>
                 </div>
 
                 <div class="no-prods" *ngIf="prodFormApiError.hasError">
                     <img src="../../../../assets/images/alert.svg" alt=""> {{prodFormApiError.message}}
                 </div>
                 <div *ngIf="!prodFormApiError.hasError">
-                    <form class="product" *ngFor="let p of products; let i =index" (submit)="addToCart($event, p.id)"
-                        [formGroup]="prodForm">
+                    <form class="product" *ngFor="let p of products; let i =index"
+                        (submit)="addToCart($event, p.id, i)">
                         <div>{{i+1}}</div>
                         <div class="title">
                             {{p.title}}
@@ -85,16 +86,17 @@
                             {{p.description}}
                         </div>
                         <div class="quantity">
-                            <input type="number" name="quantity" id="quantity" formControlName="quantity" />
-                            <div class="error-message"
-                                *ngIf="prodForm.controls['quantity'].errors && prodFormSubmitted">
-                                *{{prodErrors.required}}
-                            </div>
+                            <input type="image" src="../../../../assets/images/minus.svg" alt="Submit" width="8"
+                                height="8" (click)="subQuantity($event, i)">
+                            <input type="number" name="quantity" id="quantity" [(value)]="prodQuantity[i]"
+                                (change)="onForm2NameChange($event, i)" min="1" max="{{p.quantity}}" required onkeydown="javascript: return event.keyCode == 69 ? false : true" />
+                            <input type="image" src="../../../../assets/images/plus.svg" alt="Submit" width="8"
+                                height="8" (click)="addQuantity($event, p.quantity, i)">
                         </div>
                         <div class="sell">
                             <input type="submit" value="Add to Cart" [disabled]="prodCartFormSpinner"
-                               />
-                            <div *ngIf="prodCartFormSpinner">
+                                [hidden]="prodCartFormSpinner && current.id==p.id" />
+                            <div *ngIf="prodCartFormSpinner && current.id==p.id">
                                 <img src="../../../../assets/images/spinner.svg" width="20" height="20" />Adding....
                             </div>
                             <p *ngIf="!prodFormApiError.hasError">{{response}}</p>
