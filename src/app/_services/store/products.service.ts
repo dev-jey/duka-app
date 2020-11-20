@@ -26,4 +26,8 @@ export class ProductsService {
   getCart(): any {
     return this.http.get(`${environment.backendUrl}cart`,{ headers: this.httpHeader });
   }
+
+  updateCart(details:any): any {
+    return this.http.put(`${environment.backendUrl}cart`,details,{ headers: this.httpHeader });
+  }
 }

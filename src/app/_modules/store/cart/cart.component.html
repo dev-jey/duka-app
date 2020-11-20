@@ -29,7 +29,7 @@
     </div>
     <div class="products">
         <div class="products-favorites">
-            <h3>POPULAR PRODUCTS</h3>
+            <h3>MY CART</h3>
             <br>
             <div class="products-list">
                 <div class="product product-header" *ngIf="!prodFormSpinner">
@@ -42,17 +42,11 @@
                     <div class="price">
                         Price
                     </div>
-                    <div class="category">
-                        Category
-                    </div>
-                    <div class="in-stock">
-                        In Stock
-                    </div>
-                    <div class="description">
-                        Description
-                    </div>
                     <div class="quantity">
                         Quantity
+                    </div>
+                    <div class="subtotal">
+                        Subtotal
                     </div>
                     <div class="sell">
                         Action
@@ -60,41 +54,33 @@
                 </div>
 
                 <div class="product product-header loading-header"  *ngIf="prodFormSpinner">
-                    <div><img src="../../../../assets/images/spinner.svg" width="15" height="15" />Updating Products...</div>
+                    <div><img src="../../../../assets/images/spinner.svg" width="15" height="15" />Updating Cart...</div>
                 </div>
 
                 <div class="no-prods" *ngIf="prodFormApiError.hasError">
                     <img src="../../../../assets/images/alert.svg" alt=""> {{prodFormApiError.message}}
                 </div>
                 <div *ngIf="!prodFormApiError.hasError">
-                    <form class="product" *ngFor="let p of products; let i =index"
-                        (submit)="addToCart($event, p.id, i)">
+                    <form class="product" *ngFor="let p of cartList; let i =index">
                         <div>{{i+1}}</div>
                         <div class="title">
-                            {{p.title}}
+                            {{p.product.title}}
                         </div>
                         <div class="price">
-                            {{p.price}}
-                        </div>
-                        <div class="category">
-                            {{p.category}}
-                        </div>
-                        <div class="in-stock">
-                            {{p.quantity}}
-                        </div>
-                        <div class="description">
-                            {{p.description}}
+                            {{p.product.price}}
                         </div>
                         <div class="quantity">
                             <input type="image" src="../../../../assets/images/minus.svg" alt="Submit" width="8"
-                                height="8" (click)="subQuantity($event, i)">
-                            <input type="number" name="quantity" [(value)]="prodQuantity[i]"
-                                (change)="onForm2NameChange($event, i)" min="1" max="{{p.quantity}}" required onkeydown="javascript: return event.keyCode == 69 ? false : true" />
+                                height="8" (click)="subQuantity($event, i, p.product.id)">
+                                {{prodQuantity[i]}}
                             <input type="image" src="../../../../assets/images/plus.svg" alt="Submit" width="8"
-                                height="8" (click)="addQuantity($event, p.quantity, i)">
+                                height="8" (click)="addQuantity($event, p.product.quantity, i, p.product.id)">
+                        </div>
+                        <div class="subtotal">
+                            {{p.subtotals}}
                         </div>
                         <div class="sell">
-                            <input type="submit" value="Add to Cart" [disabled]="prodCartFormSpinner"
+                            <input type="submit" value="Remove" [disabled]="prodCartFormSpinner"
                                 [hidden]="prodCartFormSpinner && current.id==p.id" />
                             <div *ngIf="prodCartFormSpinner && current.id==p.id">
                                 <img src="../../../../assets/images/spinner.svg" width="20" height="20" />Adding....
@@ -107,17 +93,14 @@
             </div>
         </div>
         <div class="products-updates">
-            <h3>Updates</h3>
+            <h3>FINALIZE TRANSACTION</h3>
             <br>
             <div class="products-updates__card">
-                <img src="../../../../assets/images/stock.svg" alt="" />
-                <hr>
-                <h4>Almost Out of Stock</h4>
-                <ol>
-                    <li>Kabras Sugar</li>
-                    <li>Atta Maize Flour</li>
-                    <li>Elianto Cooking Oil</li>
-                </ol>
+                <h2>Sub Total</h2> <h2>{{cartDetails.Total}}</h2> <br>
+                <input type="number" name="" id="" placeholder="Amount Received">
+                <h3>Change</h3>:
+<br>
+                <input type="submit" value="Complete Transaction">
             </div>
         </div>
     </div>

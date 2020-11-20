@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/_services/store/products.service';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 
 @Component({
@@ -38,7 +37,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onForm2NameChange({ target }, i) {
-    this.prodQuantity[i] = target.value;
+    this.prodQuantity[i] = parseInt(target.value);
   }
 
   addQuantity(e, quantity, i) {
@@ -111,7 +110,7 @@ export class ProductsComponent implements OnInit {
     this.prodFormSubmitted = true;
     this.prodFormApiError = { hasError: false, message: "" };
     this.prodCartFormSpinner = true;
-    const subData = { quantity: `${this.prodQuantity[i]}`, id: `${id}` }
+    const subData = { quantity: this.prodQuantity[i], id: id, status: 0 }
     this.prodService
       .addToCart(subData)
       .subscribe(
