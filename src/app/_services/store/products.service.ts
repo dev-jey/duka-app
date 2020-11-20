@@ -30,4 +30,11 @@ export class ProductsService {
   updateCart(details:any): any {
     return this.http.put(`${environment.backendUrl}cart`,details,{ headers: this.httpHeader });
   }
+  deleteCartItem(id:any): any {
+    return this.http.delete(`${environment.backendUrl}cart/${id}`,{ headers: this.httpHeader });
+  }
+
+  deleteCart(): any {
+    return this.http.delete(`${environment.backendUrl}cart`,{ headers: this.httpHeader });
+  }
 }

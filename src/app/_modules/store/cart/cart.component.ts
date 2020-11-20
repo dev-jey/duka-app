@@ -68,7 +68,7 @@ export class CartComponent implements OnInit {
         resp => {
           this.cartLength = resp.Cart.length;
           this.cartDetails = resp;
-          this.cartList = this.cartDetails.Cart.sort((a,b) => a.title > b.title ? 1 : -1);
+          this.cartList = this.cartDetails.Cart.sort((a,b) => a.product.title > b.product.title ? 1 : -1);
           this.prodFormSubmitted = false;
           this.prodFormSpinner = false;
           resp.Cart.forEach(product =>{
@@ -96,7 +96,7 @@ export class CartComponent implements OnInit {
         resp => {
           this.cartLength = resp.Cart.length;
           this.cartDetails = resp;
-          this.cartList = this.cartDetails.Cart.sort((a,b) => a.title > b.title ? 1 : -1);
+          this.cartList = this.cartDetails.Cart.sort((a,b) => a.product.title > b.product.title ? 1 : -1);
           this.prodFormSubmitted = false;
           this.prodFormSpinner = false;
           resp.Cart.forEach(product =>{
@@ -109,6 +109,54 @@ export class CartComponent implements OnInit {
           this.prodFormSubmitted = false;
           this.prodFormSpinner = false;
           this.prodFormApiError = { hasError: true, message: err};
+          this.cartLength = 0;
+          this.cartDetails = {
+            Total: 0,
+            Cart: [],
+            Message: ""
+          };
+          this.cartList = [];
+          this.prodQuantity = [];
+        });
+  }
+
+  deleteCartItem(e, id) {
+    e.preventDefault()
+    this.prodFormSubmitted = true;
+    this.prodFormApiError = { hasError: false, message: "" };
+    this.prodFormSpinner = true
+    this.prodService
+      .deleteCartItem(id)
+      .subscribe(
+        resp => {
+          this.prodFormSubmitted = false;
+          this.prodFormSpinner = false;
+          this.getCart()
+        },
+        error => {
+          this.prodFormSubmitted = false;
+          this.prodFormSpinner = false;
+          this.getCart()
+        });
+  }
+
+  deleteCart(e) {
+    e.preventDefault()
+    this.prodFormSubmitted = true;
+    this.prodFormApiError = { hasError: false, message: "" };
+    this.prodFormSpinner = true
+    this.prodService
+      .deleteCart()
+      .subscribe(
+        resp => {
+          this.prodFormSubmitted = false;
+          this.prodFormSpinner = false;
+          this.getCart()
+        },
+        error => {
+          this.prodFormSubmitted = false;
+          this.prodFormSpinner = false;
+          this.getCart()
         });
   }
 

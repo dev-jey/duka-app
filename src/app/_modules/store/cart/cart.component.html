@@ -29,7 +29,17 @@
     </div>
     <div class="products">
         <div class="products-favorites">
-            <h3>MY CART</h3>
+            <div class="cart-header">
+                <div>
+                    <h3>MY CART</h3>
+                </div>
+                <div class="cart-search">
+                    <input type="text" name="" id="" placeholder="Search Cart">
+                </div>
+                <div>
+                    <input type="submit" value="Empty Cart" (click)="deleteCart($event)" />
+                </div>
+            </div>
             <br>
             <div class="products-list">
                 <div class="product product-header" *ngIf="!prodFormSpinner">
@@ -53,8 +63,9 @@
                     </div>
                 </div>
 
-                <div class="product product-header loading-header"  *ngIf="prodFormSpinner">
-                    <div><img src="../../../../assets/images/spinner.svg" width="15" height="15" />Updating Cart...</div>
+                <div class="product product-header loading-header" *ngIf="prodFormSpinner">
+                    <div><img src="../../../../assets/images/spinner.svg" width="15" height="15" />Updating Cart...
+                    </div>
                 </div>
 
                 <div class="no-prods" *ngIf="prodFormApiError.hasError">
@@ -72,7 +83,7 @@
                         <div class="quantity">
                             <input type="image" src="../../../../assets/images/minus.svg" alt="Submit" width="8"
                                 height="8" (click)="subQuantity($event, i, p.product.id)">
-                                {{prodQuantity[i]}}
+                            {{prodQuantity[i]}}
                             <input type="image" src="../../../../assets/images/plus.svg" alt="Submit" width="8"
                                 height="8" (click)="addQuantity($event, p.product.quantity, i, p.product.id)">
                         </div>
@@ -80,8 +91,9 @@
                             {{p.subtotals}}
                         </div>
                         <div class="sell">
-                            <input type="submit" value="Remove" [disabled]="prodCartFormSpinner"
-                                [hidden]="prodCartFormSpinner && current.id==p.id" />
+                            <input type="image" src="../../../../assets/images/delete.svg"
+                                [disabled]="prodCartFormSpinner" [hidden]="prodCartFormSpinner && current.id==p.id"
+                                width="18" height="18" (click)="deleteCartItem($event, p.product.id)" />
                             <div *ngIf="prodCartFormSpinner && current.id==p.id">
                                 <img src="../../../../assets/images/spinner.svg" width="20" height="20" />Adding....
                             </div>
@@ -96,11 +108,14 @@
             <h3>FINALIZE TRANSACTION</h3>
             <br>
             <div class="products-updates__card">
-                <h2>Sub Total</h2> <h2>{{cartDetails.Total}}</h2> <br>
-                <input type="number" name="" id="" placeholder="Amount Received">
-                <h3>Change</h3>:
-<br>
-                <input type="submit" value="Complete Transaction">
+                <h2>Sub Total</h2>
+                <h2>{{cartDetails.Total}}</h2> <br>
+                <div *ngIf="cartDetails.Total">
+                    <input type="number" name="" id="" placeholder="Amount Received">
+                    <h3>Change</h3>:
+                    <br>
+                    <input type="submit" value="Complete Transaction">
+                </div>
             </div>
         </div>
     </div>

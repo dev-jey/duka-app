@@ -209,3 +209,36 @@ $myColor: #ff3a18;
     width:100%;
     background-color: $myColor;
 }
+
+.cart-header{
+    width: 100%;
+    display: grid;
+    grid-template-columns: .5fr 2fr 1fr;
+    gap: 1rem;
+    align-items: end;
+    input{
+        width: 80%;
+        border: 1px solid silver;
+        outline: none;
+        margin: auto;
+    }
+    input[type=text]{
+        padding: .5rem 1rem;
+        border-radius: 5px;
+    }
+    input[type=submit]{
+        border-radius: 50px;
+        background-color: $myColor;
+        padding: .5rem 1rem;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        float: right;
+        margin-left:auto;
+        &:hover{
+            color: #fff;
+            background: rgba(255, 0, 0, 0.738);
+            transition: 0.2s ease-in-out;
+        }
+    }
+}

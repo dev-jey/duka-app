@@ -46,7 +46,6 @@ export class ProductsComponent implements OnInit {
     if (this.prodQuantity[i] < quantity) {
       this.prodQuantity[i] += 1
     }
-    console.log(this.prodQuantity)
   }
 
   subQuantity(e, i) {
