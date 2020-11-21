@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/_services/store/products.service';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -10,11 +12,21 @@ export class CartComponent implements OnInit {
 
   prodFormSpinner: Boolean;
   prodCartFormSpinner: Boolean;
-  prodFormApiError: any;
+  prodFormApiError: any = { hasError: false, message: "" };;
   prodFormSubmitted: Boolean;
   prodErrors = {
     required: "Field is required"
   };
+
+
+  changeForm: FormGroup;
+  changeFormSpinner: Boolean;
+  changeFormApiError: any = { hasError: false, message: "" };;
+  changeFormSubmitted: Boolean;
+  changeErrors = {
+    required: "Field is required"
+  };
+
   products: Array<any> = []
   cartList: Array<any> = []
   cartLength: number = 0
@@ -26,19 +38,31 @@ export class CartComponent implements OnInit {
     Cart: [],
     Message: ""
   }
+  payWithCash: Boolean;
+  change: Number;
 
   constructor(
-    private prodService: ProductsService
+    private prodService: ProductsService,
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getCart()
 
+    this.initChangeForm();
     //initialize default values
     this.prodFormSpinner = false;
     this.prodFormSubmitted = false;
     this.prodFormApiError = { hasError: false, message: "" };
 
+  }
+
+
+  initChangeForm() {
+    this.changeForm = this.fb.group({
+      received: [null, Validators.required],
+    });
   }
 
   addQuantity(e, quantity, i, id) {
@@ -160,6 +184,65 @@ export class CartComponent implements OnInit {
         });
   }
 
+  paymentOptions(option){
+    if(option == 1){
+      this.payWithCash = true;
+    }
+    else{
+      this.payWithCash = false;
+    }
+  }
 
+  calculateChange(e){
+    e.preventDefault();
+
+    this.changeFormSubmitted = true;
+    this.changeFormApiError = { hasError: false, message: "" };
+    //validate form
+    if (this.changeForm.invalid) {
+      return;
+    }
+    //api integration
+    this.changeFormSpinner = true;
+    
+    this.prodService
+      .calculateChange(this.changeForm.value)
+      .subscribe(
+        resp => {
+          this.changeFormSubmitted = false;
+          this.changeFormSpinner = false;
+          this.change = resp.Change;
+          this.changeFormApiError = { hasError: false, message: "" };
+        },
+        error => {
+          this.changeFormSubmitted = false;
+          this.changeFormSpinner = false;
+          this.changeFormApiError = { hasError: true, message: error.error.Error };
+        });
+  }
+
+
+  makeSale(e){
+    e.preventDefault();
+
+    this.changeFormApiError = { hasError: false, message: "" };
+    //api integration
+    this.changeFormSpinner = true;
+    
+    this.prodService
+      .makeSale()
+      .subscribe(
+        resp => {
+          this.changeFormSpinner = false;
+          this.changeFormApiError = { hasError: false, message: "" };
+
+          this.router.navigate(["shop"]);
+        },
+        error => {
+          console.log(error)
+          this.changeFormSpinner = false;
+          this.changeFormApiError = { hasError: true, message: error.error.Error };
+        });
+  }
 
 }

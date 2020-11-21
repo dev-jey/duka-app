@@ -11,6 +11,7 @@ export class ProductsComponent implements OnInit {
   prodFormSpinner: Boolean;
   prodCartFormSpinner: Boolean;
   prodFormApiError: any;
+  prodFormApiErrorCart: any = { hasError: false, message: "" };
   prodFormSubmitted: Boolean;
   prodErrors = {
     required: "Field is required"
@@ -18,7 +19,8 @@ export class ProductsComponent implements OnInit {
   products: Array<any> = []
   cartLength: number = 0
   response: String = ''
-  prodQuantity:number[]=[];
+  // prodQuantity: number[] = [];
+  prodQuantity:any;
   current: any = { id: null };
 
   constructor(
@@ -84,11 +86,11 @@ export class ProductsComponent implements OnInit {
       .getProducts()
       .subscribe(
         resp => {
-          this.products = resp.products.sort((a,b) => a.title > b.title ? 1 : -1);
+          this.products = resp.products.sort((a, b) => a.title > b.title ? 1 : -1);
           this.prodFormSpinner = false;
           this.prodFormSubmitted = false;
           this.prodFormApiError = { hasError: false, message: "" };
-          this.products.forEach(product =>{
+          this.products.forEach(product => {
             this.prodQuantity.push(1)
           })
         },
@@ -105,26 +107,29 @@ export class ProductsComponent implements OnInit {
 
   addToCart(e, id, i) {
     e.preventDefault()
+    this.prodFormApiErrorCart = { hasError: false, message: "" };
+    if(!this.prodQuantity[i]){
+      this.prodFormApiErrorCart = { hasError: true, message: "Enter a quantity"};
+      return;
+    }
     this.current = this.products.filter(item => item.id == id)[0];
     this.prodFormSubmitted = true;
-    this.prodFormApiError = { hasError: false, message: "" };
     this.prodCartFormSpinner = true;
-    const subData = { quantity: this.prodQuantity[i], id: id, status: 0 }
+    const subData = { quantity: this.prodQuantity[i], id: id, status: 1 }
     this.prodService
       .addToCart(subData)
       .subscribe(
         resp => {
           this.prodFormSubmitted = false;
-          this.prodFormApiError = { hasError: false, message: "" };
+          this.prodFormApiErrorCart = { hasError: false, message: "" };
           this.prodCartFormSpinner = false;
           this.response = resp.Message;
           this.getCart()
           this.getProducts()
         },
         error => {
-          console.log(error)
           this.prodFormSubmitted = false;
-          this.prodFormApiError = { hasError: true, message: "" };
+          this.prodFormApiErrorCart = { hasError: true, message: error.error.Message || error.error.message };
           this.prodCartFormSpinner = false;
           this.getCart()
           this.getProducts()

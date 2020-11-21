@@ -108,13 +108,37 @@
             <h3>FINALIZE TRANSACTION</h3>
             <br>
             <div class="products-updates__card">
-                <h2>Sub Total</h2>
+                <h2>Total</h2>
                 <h2>{{cartDetails.Total}}</h2> <br>
                 <div *ngIf="cartDetails.Total">
-                    <input type="number" name="" id="" placeholder="Amount Received">
-                    <h3>Change</h3>:
+
+                    <input type="submit" value="Cash Payment" (click)="paymentOptions(1)">
+
+                    <input type="submit" value="Mpesa" (click)="paymentOptions(0)" disabled>
+                </div>
+
+                <div *ngIf="cartDetails.Total && payWithCash">
                     <br>
-                    <input type="submit" value="Complete Transaction">
+                    <form action="" [formGroup]="changeForm" (submit)="calculateChange($event)">
+                        <input type="number" name="received" id="" placeholder="Amount Received" required
+                            min="cartDetails.Total" formControlName="received">
+                            <div class=""  *ngIf="changeForm.controls['received'].errors && changeFormSubmitted">
+                                *{{changeErrors.required}}
+                            </div>
+                        <input type="submit" value="Calculate Change" [disabled]="changeFormSpinner">
+                        <img src="../../../../assets/images/spinner.svg" width="20" height="20"
+                            *ngIf="changeFormSpinner" />
+                    </form>
+                    <div class="change" *ngIf="change >= 0 && !changeFormApiError.hasError">
+                        <h3>Change</h3> {{change}}
+                        <br>
+
+                        <input type="submit" value="Complete Transaction" (click)="makeSale($event)">
+                    </div>
+                    <div class="error" *ngIf="changeFormApiError.hasError">
+                        <h3>{{changeFormApiError.message}}</h3>
+                    </div>
+                    <br>
                 </div>
             </div>
         </div>

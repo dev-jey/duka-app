@@ -5,6 +5,7 @@ import { StoreRoutingModule } from './store-routing.module';
 import { StoreComponent } from 'src/app/_layout/store/store.component';
 import { StoreNavbarComponent } from 'src/app/_layout/store/store-navbar/store-navbar.component';
 import { CartComponent } from './cart/cart.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -12,7 +13,9 @@ import { CartComponent } from './cart/cart.component';
   declarations: [ProductsComponent, StoreComponent, StoreNavbarComponent, CartComponent],
   imports: [
     CommonModule,
-    StoreRoutingModule
+    StoreRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class StoreModule { }

@@ -37,4 +37,13 @@ export class ProductsService {
   deleteCart(): any {
     return this.http.delete(`${environment.backendUrl}cart`,{ headers: this.httpHeader });
   }
+
+  calculateChange(received:any): any {
+    return this.http.post(`${environment.backendUrl}change`, received, { headers: this.httpHeader });
+  }
+
+  makeSale(): any {
+    return this.http.post(`${environment.backendUrl}sales`,null, { headers: this.httpHeader });
+  }
 }
+
