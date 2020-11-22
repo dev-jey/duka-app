@@ -5,6 +5,7 @@ import { StoreComponent } from 'src/app/_layout/store/store.component';
 import { RouteProtectService } from 'src/app/_services/shared/route-protect.service';
 import { CartComponent } from './cart/cart.component';
 import { ProductsComponent } from './products/products.component';
+import { SalesComponent } from './sales/sales.component';
 
 
 
@@ -23,8 +24,14 @@ const routes: Routes = [
         { path: "", component: CartComponent },
     ],
     canActivate: [RouteProtectService]
+  },{
+    path: "sales",
+    component: StoreComponent,
+    children: [
+        { path: "", component: SalesComponent },
+    ],
+    canActivate: [RouteProtectService]
   },
-
 ];
 
 @NgModule({

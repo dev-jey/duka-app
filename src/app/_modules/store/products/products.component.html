@@ -4,9 +4,21 @@
             <a routerLink="/">DukaShop</a>
         </div>
         <div class="navbar__right">
+            <a routerLink="/shop" class="navbar__right-cart active">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                All Products
+            </a>
+            <a routerLink="/sales" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                My Sales
+            </a>
             <a routerLink="/cart" class="navbar__right-cart">
                 <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
                 Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
+            </a>
+            <a routerLink="/notifications" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15">
+                <span class="cart-length">{{cartLength}}</span>
             </a>
             <a routerLink="/contact" class="navbar__right-profile">
                 <img src="../../../../assets/images/profile.svg" alt="" width="16">
@@ -107,20 +119,6 @@
                     </form>
                 </div>
 
-            </div>
-        </div>
-        <div class="products-updates">
-            <h3>Updates</h3>
-            <br>
-            <div class="products-updates__card">
-                <img src="../../../../assets/images/stock.svg" alt="" />
-                <hr>
-                <h4>Almost Out of Stock</h4>
-                <ol>
-                    <li>Kabras Sugar</li>
-                    <li>Atta Maize Flour</li>
-                    <li>Elianto Cooking Oil</li>
-                </ol>
             </div>
         </div>
     </div>

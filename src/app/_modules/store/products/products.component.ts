@@ -19,7 +19,6 @@ export class ProductsComponent implements OnInit {
   products: Array<any> = []
   cartLength: number = 0
   response: String = ''
-  // prodQuantity: number[] = [];
   prodQuantity:any;
   current: any = { id: null };
 
@@ -28,8 +27,8 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProducts()
     this.getCart()
+    this.getProducts()
 
     //initialize default values
     this.prodFormSpinner = false;

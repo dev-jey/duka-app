@@ -6,11 +6,12 @@ import { StoreComponent } from 'src/app/_layout/store/store.component';
 import { StoreNavbarComponent } from 'src/app/_layout/store/store-navbar/store-navbar.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SalesComponent } from './sales/sales.component';
 
 
 
 @NgModule({
-  declarations: [ProductsComponent, StoreComponent, StoreNavbarComponent, CartComponent],
+  declarations: [ProductsComponent, StoreComponent, StoreNavbarComponent, CartComponent, SalesComponent],
   imports: [
     CommonModule,
     StoreRoutingModule,

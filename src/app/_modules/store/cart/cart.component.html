@@ -4,9 +4,21 @@
             <a routerLink="/">DukaShop</a>
         </div>
         <div class="navbar__right">
-            <a routerLink="/cart" class="navbar__right-cart">
+            <a routerLink="/shop" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                All Products
+            </a>
+            <a routerLink="/sales" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                My Sales
+            </a>
+            <a routerLink="/cart" class="navbar__right-cart active">
                 <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
                 Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
+            </a>
+            <a routerLink="/notifications" class="navbar__right-cart">
+                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15">
+                <span class="cart-length">{{cartLength}}</span>
             </a>
             <a routerLink="/contact" class="navbar__right-profile">
                 <img src="../../../../assets/images/profile.svg" alt="" width="16">
@@ -20,13 +32,6 @@
 </header>
 <div class="main">
     <br>
-    <div class="search">
-        <form action="">
-            <input type="text" name="search" class="search-input field" id="search"
-                placeholder="Search by product name or product code">
-            <input type="submit" value="Search" class="search-input query">
-        </form>
-    </div>
     <div class="products">
         <div class="products-favorites">
             <div class="cart-header">

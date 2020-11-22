@@ -1,0 +1,25 @@
+$myColor: #ff3a18;
+.cart-header{
+    width: 100%;
+    display: grid;
+    grid-template-columns: .5fr 2fr;
+    align-items: end;
+    input{
+        width: 96.5%;
+        border: 1px solid silver;
+        outline: none;
+        margin-left: auto;
+    }
+    input[type=text]{
+        padding: .5rem 1rem;
+        border-radius: 5px;
+    }
+}
+
+.main{
+    & .products{
+        & .product{
+            grid-template-columns: repeat(8, 1fr);
+        }
+    }
+}

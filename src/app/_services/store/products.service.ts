@@ -45,5 +45,9 @@ export class ProductsService {
   makeSale(): any {
     return this.http.post(`${environment.backendUrl}sales`,null, { headers: this.httpHeader });
   }
+
+  getSales(): any {
+    return this.http.get(`${environment.backendUrl}sales`, { headers: this.httpHeader });
+  }
 }
 
