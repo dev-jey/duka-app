@@ -62,7 +62,7 @@ $myColor: #ff3a18;
             }
         }
         & .product{
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: .5fr 1fr 1fr .5fr 1fr 1fr;
         }
     }
 }

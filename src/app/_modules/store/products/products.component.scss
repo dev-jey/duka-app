@@ -47,3 +47,11 @@ $myColor: #ff3a18;
     width:100%;
     background-color: $myColor;
 }
+.main{
+    & .products{
+        & .product{
+            grid-template-columns: .5fr 1.5fr 1fr 1fr .8fr 2fr 1fr 1fr;
+            gap: .2rem;
+        }
+    }
+}

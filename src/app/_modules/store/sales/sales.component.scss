@@ -19,7 +19,21 @@ $myColor: #ff3a18;
 .main{
     & .products{
         & .product{
-            grid-template-columns: repeat(8, 1fr);
+            grid-template-columns: .5fr 1fr 1.5fr 1fr .5fr 1fr 2fr 1fr;
         }
     }
+}
+
+.error-message{
+    color: $myColor;
+    font-size: .5rem;
+    text-align: center;
+}
+
+.loading-header{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr !important;
+    width:100%;
+    background-color: $myColor;
 }
