@@ -1,32 +1,20 @@
 $myColor: #ff3a18;
 .main {
-    display: grid;
-    place-items: center;
-    margin-top: 50px;
-    & .search {
-        position: relative;
-    }
     .search-input {
         height: 40px;
         outline: none;
         border: 1px solid $myColor;
     }
+    .search{
+        display: grid;
+        align-items: center;
+        justify-content: end;
+    }
     .field {
-        width: 450px;
+        position: relative;
         padding: 0rem 1rem;
         padding-right: 10rem;
-        border-radius: 50px;
-    }
-    .query {
-        width: 150px;
-        height: 44px;
-        position: absolute;
-        border-radius: 50px;
-        right: 0;
-        top: 0;
-        background-color: $myColor;
-        cursor: pointer;
-        color: #fff;
+        border-radius: 5px;
     }
     .query:hover{
         background: rgba(255, 0, 0, 0.738);

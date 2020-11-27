@@ -15,8 +15,26 @@ $myColor: #ff3a18;
         border-radius: 5px;
     }
 }
-
-.main{
+.main {
+    .search-input {
+        height: 40px;
+        outline: none;
+        border: 1px solid $myColor;
+    }
+    .search{
+        display: grid;
+        align-items: center;
+        justify-content: end;
+    }
+    .field {
+        position: relative;
+        padding: 0rem 1rem;
+        padding-right: 10rem;
+        border-radius: 5px;
+    }
+    .query:hover{
+        background: rgba(255, 0, 0, 0.738);
+    }
     & .products{
         & .product{
             grid-template-columns: .5fr 1fr 1.5fr 1fr .5fr 1fr 2fr 1fr;

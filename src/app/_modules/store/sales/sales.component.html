@@ -5,19 +5,19 @@
         </div>
         <div class="navbar__right">
             <a routerLink="/shop" class="navbar__right-cart">
-                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                <img src="../../../../assets/images/list.svg" alt="" width="15"> &nbsp;
                 All Products
             </a>
             <a routerLink="/sales" class="navbar__right-cart active">
-                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                <img src="../../../../assets/images/sales.svg" alt="" width="15"> &nbsp;
                 My Sales
             </a>
             <a routerLink="/cart" class="navbar__right-cart">
-                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15"> &nbsp;
+                <img src="../../../../assets/images/cart.svg" alt="" width="15"> &nbsp;
                 Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
             </a>
             <a routerLink="/notifications" class="navbar__right-cart">
-                <img src="../../../../assets/images/shoppingcart.svg" alt="" width="15">
+                <img src="../../../../assets/images/bel.svg" alt="" width="15"> &nbsp;
                 <span class="cart-length">{{cartLength}}</span>
             </a>
             <a routerLink="/contact" class="navbar__right-profile">
@@ -31,15 +31,18 @@
     </nav>
 </header>
 <div class="main">
-    <br>
     <div class="products">
         <div class="products-favorites">
-            <div class="cart-header">
+            <div class="products-header">
                 <div>
                     <h3>MY SALES</h3>
                 </div>
-                <div class="cart-search">
-                    <input type="text" name="" id="" placeholder="Search by Product Title">
+
+                <div class="search">
+                    <form action="">
+                        <input type="text" name="search" class="search-input field" id="search"
+                            placeholder="Search by product name or product code">
+                    </form>
                 </div>
             </div>
             <br>

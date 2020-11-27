@@ -1,36 +1,5 @@
 $myColor: #ff3a18;
 .main {
-    display: grid;
-    place-items: center;
-    & .search {
-        position: relative;
-        display: none;
-    }
-    .search-input {
-        height: 40px;
-        outline: none;
-        border: 1px solid $myColor;
-    }
-    .field {
-        width: 450px;
-        padding: 0rem 1rem;
-        padding-right: 10rem;
-        border-radius: 50px;
-    }
-    .query {
-        width: 150px;
-        height: 44px;
-        position: absolute;
-        border-radius: 50px;
-        right: 0;
-        top: 0;
-        background-color: $myColor;
-        cursor: pointer;
-        color: #fff;
-    }
-    .query:hover{
-        background: rgba(255, 0, 0, 0.738);
-    }
     & .products {
         grid-template-columns: 75% 25%;
         &-favorites {
@@ -52,6 +21,8 @@ $myColor: #ff3a18;
         }
         &-updates {
             padding: 1rem;
+            display: grid;
+            align-items: center;
             &__card {
                 box-shadow: 0px 0px 10px rgb(228, 228, 228);
                 padding: 0.5rem 1rem;
@@ -99,7 +70,7 @@ $myColor: #ff3a18;
         border-radius: 5px;
     }
     input[type=submit]{
-        border-radius: 50px;
+        border-radius: 5px;
         background-color: $myColor;
         padding: .5rem 1rem;
         color: #fff;
