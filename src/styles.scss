@@ -68,6 +68,8 @@ input[type="submit"]:disabled:hover {
         color: $mydark2;
         text-transform: uppercase;
         font-weight: bolder;
+        display: flex;
+        align-items: center;
         }
         & a:hover{
             color: $mydark1;
