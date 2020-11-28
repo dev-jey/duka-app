@@ -1,55 +1,109 @@
-@import '../../../../styles/variables';
+@import "../../../../styles/variables";
 
-.main{
+.main {
     display: grid;
     grid-template-columns: 50% 50%;
     gap: 1.5rem;
-    margin-top: 50px;
+    height: calc(100vh - 130px);
     align-items: center;
+    align-content: center;
     position: relative;
-    &__left{
+    &__left {
         padding: 1rem 0rem;
         position: relative;
         height: 100%;
-        background-color: $mywhite;
-        &-description{
-            background: $mywhite;
-            padding: 1.2rem 1rem;
-            border-radius: 10px;
-            color: rgb(66, 66, 66);
-            font-size: .9rem;
-
+        background-color: inherit;
+        &-description {
+            padding: 0rem 1rem;
+            line-height: 31px;
+            font-style: normal;
+            font-weight: normal;
+            border-left: 4px solid $mydark1;
+            color: $textmuted;
+            font-size: 0.9rem;
         }
-        &-freetrial{
+        &-freetrial {
             position: relative;
             cursor: pointer;
-            font-size: .75rem;
-            &:hover{
-                color: $mylight1;
-                border: $mydark1 1px solid;
-                background-color: $mywhite;
-                box-sizing: border-box;
-                transition: .2s ease-in-out;
-            }
+        }
+        .topic {
+            color: $mylight3;
+            font-weight: normal;
+            font-size: 2.75rem;
+            line-height: 71px;
+        }
+        .alternating {
+            font-weight: normal;
+            font-size: 2.75rem;
+            line-height: 71px;
+            color: $mydark2;
         }
     }
-    &__right{
+    &__right {
         display: grid;
         justify-items: right;
         align-items: center;
         height: 100%;
-        & img{
+        & .svgs {
+            position: relative;
+        }
+        & .shopanime {
             width: 100%;
-            z-index: -1;
+        }
+        & .cash {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: 10%;
+            margin-top: 10%;
         }
     }
 }
-.right-background{
+.left-background {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
-    height: 100%;
+    height: 100vh;
     width: 50%;
-    background-color: $mylight1;
+    background-color: $mywhite;
     z-index: -2000;
+}
+
+@media screen and (max-width: $myWidth) {
+    .left-background {
+        background: none !important;
+    }
+    .main {
+        &__left {
+            &-description {
+                color: $mylight3;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .left-background {
+        background: none !important;
+        width: 100%;
+        display: none;
+    }
+    .main {
+        grid-template-columns: 100%;
+        margin-top: 100px !important;
+        grid-template-areas: 
+          "a"
+          "b";
+        &__left {
+            margin-top: 50px;
+            grid-area: b;
+            margin-bottom: 30px;
+        }
+        &__right{
+            margin: auto;
+            grid-area: a;
+            margin-top: 70px;
+            z-index: -2;
+        }
+    }
 }
