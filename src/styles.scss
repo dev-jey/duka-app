@@ -49,11 +49,11 @@ body {
     transition: $transitionTime;
 }
 input[type="submit"]:disabled {
-    background: #dddddd;
+    background: $textmuted;
     cursor: progress;
 }
 input[type="submit"]:disabled:hover {
-    background: #dddddd;
+    background: $textmuted;
     cursor: not-allowed;
 }
 
@@ -240,8 +240,31 @@ input[type="submit"]:disabled:hover {
 }
 
 
+.left-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 50%;
+    background-color: $mywhite;
+    z-index: -2000;
+}
+
+
+
+@media screen and (max-width: $myWidth) {
+    .left-background {        
+        background: none !important;
+    }
+}
+
 
 @media screen and (max-width: 768px) {
+    .left-background {        
+        background: none !important;
+        width: 100%;
+        display: none;
+    }
     .navbar {
         display: grid;
         grid-template-columns: 50% 50%;

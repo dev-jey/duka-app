@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 50% 50%;
     gap: 1.5rem;
-    height: calc(100vh - 130px);
+    height: $contentHeight;
     align-items: center;
     align-content: center;
     position: relative;
@@ -59,20 +59,8 @@
         }
     }
 }
-.left-background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 50%;
-    background-color: $mywhite;
-    z-index: -2000;
-}
 
 @media screen and (max-width: $myWidth) {
-    .left-background {
-        background: none !important;
-    }
     .main {
         &__left {
             &-description {

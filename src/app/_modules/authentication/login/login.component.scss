@@ -1,55 +1,71 @@
-$myColor: #FF3A18;
+@import "../../../../styles/variables";
 
-.login__form{
+.login__form {
     width: 320px;
     text-align: center;
-    & input[type=email], & input[type=password]{
+    & input {
+        font-family: $myFont;
+    }
+    & input[type="email"],
+    & input[type="password"] {
         border: none;
         outline: none;
-        border: solid 1px $myColor;
+        border: solid 1px $textmuted;
         height: 40px;
-        width: 90%;
-        border-radius: 50px;
-        margin: .5rem;
+        width: 80%;
         padding: 0rem 1rem;
-        transition: .2s ease-in-out;
+        transition: 0.2s ease-in-out;
     }
-    &-btn{
-        cursor: pointer;
-        background-color: $myColor;
-        color: #fff;
-        height: 40px;
-        width: 100%; margin: .5rem;
-        padding: 0rem 1rem !important;
-    }
-    &-btn:hover{
-        background-color: #FFF6DA;
-        color: $myColor;
-        border: $myColor 1px solid;
-        box-sizing: border-box;
-        transition: .2s ease-in-out;
-    }
-    p{
-        color: rgb(66, 66, 66);
+    p {
+        color: $textmuted;
         font-weight: bolder;
-        font-size: .75rem;
+        font-size: 0.75rem;
+    }
+    &-btn {
+        width: 90%;
+        cursor: pointer;
+        font-family: $myFont;
+        img{
+            margin: auto;
+        }
     }
 }
-.login-container{
+.login-container {
     display: grid;
-    height: calc(100vh - 100px);
-    place-items: center;
+    height: $contentHeight;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    &__right {
+        display: grid;
+        place-items: center;
+        h2 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 53px;
+        }
+    }
 }
-.api-error{
-    color: $myColor;
-    img{
+.api-error {
+    color: $myred;
+    img {
         width: 12px;
     }
 }
-.error-message{
-    color: $myColor;
+.error-message {
+    color: $myred;
     text-align: left;
-    font-size: .5rem;
-    margin-left: 20px;
-    margin-top: -5px;
+    font-size: 0.75rem;
+    margin-left: 15px;
+    // margin-top: -5px;
+}
+
+@media screen and (max-width: $myWidth) {
+    .login-container {
+        grid-template-columns: 1fr;
+        &__left {
+        display: none;
+        }
+    }
 }

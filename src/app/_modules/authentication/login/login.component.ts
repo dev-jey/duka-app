@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
   /**
    * Login api integration
    */
-  login() {
+  login(e) {
+    e.preventDefault();
     this.loginFormSubmitted = true;
     this.loginFormApiError = { hasError: false, message: "" };
     //validate form
