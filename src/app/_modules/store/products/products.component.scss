@@ -3,7 +3,7 @@ $myColor: #ff3a18;
     .search-input {
         height: 40px;
         outline: none;
-        border: 1px solid $myColor;
+        border: 1px solid silver;
     }
     .search{
         display: grid;
@@ -41,5 +41,23 @@ $myColor: #ff3a18;
             grid-template-columns: .5fr 1.5fr 1fr 1fr .8fr 2fr 1fr 1fr;
             gap: .2rem;
         }
+    }
+}
+.sell {
+    display: grid;
+    place-items: center;
+    input {
+        border: none;
+        font-size: 0.75rem;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        border-radius: 5px;
+        background-color: $myColor;
+        padding: .5rem 1rem;
+    }
+    input:hover {
+        color: #fff;
+        transition: transitionTime;
     }
 }

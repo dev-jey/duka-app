@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/_services/store/products.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -44,7 +45,8 @@ export class CartComponent implements OnInit {
   constructor(
     private prodService: ProductsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -217,10 +219,16 @@ export class CartComponent implements OnInit {
         error => {
           this.changeFormSubmitted = false;
           this.changeFormSpinner = false;
-          this.changeFormApiError = { hasError: true, message: error.error.Error };
+          this.toastr.error(error.error.Error, 'Error');
         });
   }
 
+  logout(e){
+    e.preventDefault();
+    localStorage.removeItem("token");
+    this.router.navigateByUrl("/");
+
+  }
 
   makeSale(e){
     e.preventDefault();

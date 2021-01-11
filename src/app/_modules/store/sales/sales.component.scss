@@ -19,7 +19,7 @@ $myColor: #ff3a18;
     .search-input {
         height: 40px;
         outline: none;
-        border: 1px solid $myColor;
+        border: 1px solid silver;
     }
     .search{
         display: grid;
@@ -54,4 +54,14 @@ $myColor: #ff3a18;
     grid-template-columns: 1fr !important;
     width:100%;
     background-color: $myColor;
+}
+.total{
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 2.5rem;
+    color: grey;
+    span{
+        font-weight: bolder;
+        color: #000;
+    }
 }

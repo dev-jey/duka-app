@@ -4,27 +4,18 @@
             <a routerLink="/">DukaShop</a>
         </div>
         <div class="navbar__right">
-            <a routerLink="/shop" class="navbar__right-cart">
-                <img src="../../../../assets/images/list.svg" alt="" width="15"> &nbsp;
-                All Products
-            </a>
             <a routerLink="/sales" class="navbar__right-cart active">
-                <img src="../../../../assets/images/sales.svg" alt="" width="15"> &nbsp;
-                My Sales
+                <img src="../../../../assets/images/sales.svg" alt="" width="20">
             </a>
             <a routerLink="/cart" class="navbar__right-cart">
-                <img src="../../../../assets/images/cart.svg" alt="" width="15"> &nbsp;
-                Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
-            </a>
-            <a routerLink="/notifications" class="navbar__right-cart">
-                <img src="../../../../assets/images/bel.svg" alt="" width="15"> &nbsp;
+                <img src="../../../../assets/images/cart.svg" alt="" width="20">
                 <span class="cart-length">{{cartLength}}</span>
             </a>
-            <a routerLink="/contact" class="navbar__right-profile">
-                <img src="../../../../assets/images/profile.svg" alt="" width="16">
+            <a class="navbar__right-profile">
+                <img src="../../../../assets/images/profile.svg" alt="" width="21">
 
-                <div class="profile-dropdown animate__animated animate__fadeInLeft ">
-                    <button>Logout</button>
+                <div class="profile-dropdown">
+                    <button (click)="logout($event)">Logout</button>
                 </div>
             </a>
         </div>
@@ -107,14 +98,14 @@
                                 {{item.product_description}}
                             </div>
                             <div class="description">
-                                {{item.date}}
+                                {{item.date | date}}
                             </div>
                         </form>
                     </div>
                 </div>
 
                 <div class="total" *ngIf="!saleFormApiError.hasError">
-                    Total Ksh. {{total}}
+                    Total Ksh. <span>{{total}}</span>
                 </div>
 
             </div>

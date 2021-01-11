@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/_services/store/products.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sales',
@@ -17,7 +18,8 @@ export class SalesComponent implements OnInit {
   prodFormSubmitted: Boolean;
   sales:Array<any> = []
   constructor(
-    private prodService: ProductsService
+    private prodService: ProductsService,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,11 @@ export class SalesComponent implements OnInit {
         });
   }
 
+  logout(e){
+    e.preventDefault();
+    localStorage.removeItem("token");
+    this.router.navigateByUrl("/");
+  }
 
   getSales(){
     this.saleFormSubmitted = true;

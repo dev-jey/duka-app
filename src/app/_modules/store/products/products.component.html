@@ -4,27 +4,19 @@
             <a routerLink="/">DukaShop</a>
         </div>
         <div class="navbar__right">
-            <a routerLink="/shop" class="navbar__right-cart active">
-                <img src="../../../../assets/images/list.svg" alt="" width="15"> &nbsp;
-                All Products
-            </a>
             <a routerLink="/sales" class="navbar__right-cart">
-                <img src="../../../../assets/images/sales.svg" alt="" width="15"> &nbsp;
-                My Sales
+                <img src="../../../../assets/images/sales.svg" alt="" width="20"> 
+                
             </a>
             <a routerLink="/cart" class="navbar__right-cart">
-                <img src="../../../../assets/images/cart.svg" alt="" width="15"> &nbsp;
-                Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
-            </a>
-            <a routerLink="/notifications" class="navbar__right-cart">
-                <img src="../../../../assets/images/bel.svg" alt="" width="15">
+                <img src="../../../../assets/images/cart.svg" alt="" width="20">
                 <span class="cart-length">{{cartLength}}</span>
             </a>
-            <a routerLink="/contact" class="navbar__right-profile">
-                <img src="../../../../assets/images/profile.svg" alt="" width="16">
+            <a class="navbar__right-profile">
+                <img src="../../../../assets/images/profile.svg" alt="" width="21">
 
-                <div class="profile-dropdown animate__animated animate__fadeInLeft ">
-                    <button>Logout</button>
+                <div class="profile-dropdown">
+                    <button (click)="logout($event)">Logout</button>
                 </div>
             </a>
         </div>
@@ -40,17 +32,14 @@
 
                 <div class="search">
                     <form action="">
-                        <input type="text" name="search" class="search-input field" id="search"
-                            placeholder="Search by product name or product code">
+                        <input type="text" name="search" class="search-input field" id="search-fld"
+                            placeholder="Search by product name or product code" (change)="searchProduct($event)">
                     </form>
                 </div>
             </div>
             <br>
-            <div class="no-prods" *ngIf="prodFormApiErrorCart.hasError">
-                <img src="../../../../assets/images/alert.svg" alt=""> {{prodFormApiErrorCart.message}}
-            </div>
             <div class="products-list">
-                <div class="product product-header" *ngIf="!prodFormSpinner">
+                <div class="product product-header">
                     <div class="number">
                         #
                     </div>
@@ -77,11 +66,6 @@
                     </div>
                 </div>
 
-
-                <div class="product product-header loading-header" *ngIf="prodFormSpinner">
-                    <div><img src="../../../../assets/images/spinner.svg" width="15" height="15" />Updating Products...
-                    </div>
-                </div>
 
                 <div *ngIf="!prodFormApiError.hasError">
                     <form class="product" *ngFor="let p of products; let i =index"

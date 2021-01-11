@@ -3,6 +3,9 @@
 .login__form {
     width: 320px;
     text-align: center;
+    max-width: 350px;
+    width: 100%;
+    margin-left: 200px;
     & input {
         font-family: $myFont;
     }
@@ -12,24 +15,31 @@
         outline: none;
         border: solid 1px $textmuted;
         height: 40px;
-        width: 80%;
-        padding: 0rem 1rem;
+        width: 100%;
+        padding: 0rem 0rem 0rem 1rem;
+        box-sizing: border-box;
         transition: 0.2s ease-in-out;
     }
-    & input[type="email"]:focus,& input[type="email"]:hover,
-    & input[type="password"]:focus, & input[type="password"]:hover {
+    & input[type="email"]:focus,
+    & input[type="email"]:hover,
+    & input[type="password"]:focus,
+    & input[type="password"]:hover {
         border: solid 1px $mydark1;
     }
     p {
         color: $textmuted;
         font-weight: bolder;
-        font-size: 0.75rem;
+        font-size: 0.9rem;
+    }
+    .link {
+        color: $mydark1;
+        text-decoration: underline;
     }
     &-btn {
-        width: 90%;
+        width: 100% !important;
         cursor: pointer;
         font-family: $myFont;
-        img{
+        img {
             margin: auto;
         }
     }
@@ -61,15 +71,16 @@
     color: $myred;
     text-align: left;
     font-size: 0.75rem;
-    margin-left: 15px;
-    // margin-top: -5px;
 }
 
 @media screen and (max-width: $myWidth) {
+    .login__form{
+    margin-left: 0px;
+    }
     .login-container {
         grid-template-columns: 1fr;
         &__left {
-        display: none;
+            display: none;
         }
     }
 }

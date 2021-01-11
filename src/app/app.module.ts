@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationModule } from './_modules/authentication/authentication.module';
 import { StoreModule } from './_modules/store/store.module';
@@ -27,6 +31,14 @@ import { ForbiddenComponent } from './_modules/errors/forbidden/forbidden.compon
     StoreModule,
     AdminModule,
     HttpClientModule,
+
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center',
+      maxOpened: 1,
+      autoDismiss: true,
+      preventDuplicates: true,
+    }), // ToastrModule added
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

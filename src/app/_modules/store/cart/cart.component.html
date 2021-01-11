@@ -4,27 +4,18 @@
             <a routerLink="/">DukaShop</a>
         </div>
         <div class="navbar__right">
-            <a routerLink="/shop" class="navbar__right-cart">
-                <img src="../../../../assets/images/list.svg" alt="" width="15"> &nbsp;
-                All Products
-            </a>
             <a routerLink="/sales" class="navbar__right-cart">
-                <img src="../../../../assets/images/sales.svg" alt="" width="15"> &nbsp;
-                My Sales
+                <img src="../../../../assets/images/sales.svg" alt="" width="20">
             </a>
             <a routerLink="/cart" class="navbar__right-cart active">
-                <img src="../../../../assets/images/cart.svg" alt="" width="15"> &nbsp;
-                Cart &nbsp;<span class="cart-length">{{cartLength}}</span>
-            </a>
-            <a routerLink="/notifications" class="navbar__right-cart">
-                <img src="../../../../assets/images/bel.svg" alt="" width="15">
+                <img src="../../../../assets/images/cart.svg" alt="" width="20">
                 <span class="cart-length">{{cartLength}}</span>
             </a>
-            <a routerLink="/contact" class="navbar__right-profile">
-                <img src="../../../../assets/images/profile.svg" alt="" width="16">
+            <a class="navbar__right-profile">
+                <img src="../../../../assets/images/profile.svg" alt="" width="21">
 
-                <div class="profile-dropdown animate__animated animate__fadeInLeft ">
-                    <button>Logout</button>
+                <div class="profile-dropdown">
+                    <button (click)="logout($event)">Logout</button>
                 </div>
             </a>
         </div>
@@ -64,7 +55,7 @@
                         Subtotal
                     </div>
                     <div class="sell">
-                        Action
+                        Remove
                     </div>
                 </div>
 
@@ -111,15 +102,12 @@
         </div>
         <div class="products-updates">
             <h3>FINALIZE TRANSACTION</h3>
-            <br>
             <div class="products-updates__card">
                 <h2>Total</h2>
-                <h2>{{cartDetails.Total}}</h2> <br>
+                <h2>Ksh. {{cartDetails.Total}}</h2>
                 <div *ngIf="cartDetails.Total">
 
                     <input type="submit" value="Cash Payment" (click)="paymentOptions(1)">
-
-                    <input type="submit" value="Mpesa" (click)="paymentOptions(0)" disabled>
                 </div>
 
                 <div *ngIf="cartDetails.Total && payWithCash">
@@ -127,7 +115,7 @@
                     <form action="" [formGroup]="changeForm" (submit)="calculateChange($event)">
                         <input type="number" name="received" id="" placeholder="Amount Received" required
                             min="cartDetails.Total" formControlName="received">
-                            <div class=""  *ngIf="changeForm.controls['received'].errors && changeFormSubmitted">
+                            <div class="required"  *ngIf="changeForm.controls['received'].errors && changeFormSubmitted">
                                 *{{changeErrors.required}}
                             </div>
                         <input type="submit" value="Calculate Change" [disabled]="changeFormSpinner">
@@ -135,13 +123,10 @@
                             *ngIf="changeFormSpinner" />
                     </form>
                     <div class="change" *ngIf="change >= 0 && !changeFormApiError.hasError">
-                        <h3>Change</h3> {{change}}
+                        <h3>Change</h3> Ksh. {{change}}
                         <br>
 
                         <input type="submit" value="Complete Transaction" (click)="makeSale($event)">
-                    </div>
-                    <div class="error" *ngIf="changeFormApiError.hasError">
-                        <h3>{{changeFormApiError.message}}</h3>
                     </div>
                     <br>
                 </div>

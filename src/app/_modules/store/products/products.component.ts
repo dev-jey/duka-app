@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/_services/store/products.service';
-
+import { ToastrService } from 'ngx-toastr';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -23,7 +24,9 @@ export class ProductsComponent implements OnInit {
   current: any = { id: null };
 
   constructor(
-    private prodService: ProductsService
+    private prodService: ProductsService,
+    private toastr: ToastrService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +40,11 @@ export class ProductsComponent implements OnInit {
 
   }
 
+  searchProduct(e){
+    e.preventDefault();
+    this.products = this.products.filter(prod => prod.title.toUpperCase().includes(e.target.value.toUpperCase()));
+  }
+
   onForm2NameChange({ target }, i) {
     this.prodQuantity[i] = parseInt(target.value);
   }
@@ -47,6 +55,12 @@ export class ProductsComponent implements OnInit {
     if (this.prodQuantity[i] < quantity) {
       this.prodQuantity[i] += 1
     }
+  }
+
+  logout(e){
+    e.preventDefault();
+    localStorage.removeItem("token");
+    this.router.navigateByUrl("/");
   }
 
   subQuantity(e, i) {
@@ -69,7 +83,6 @@ export class ProductsComponent implements OnInit {
         },
         error => {
           const err = error.error.Message;
-          console.log(err)
           this.prodFormSubmitted = false;
         });
   }
@@ -81,10 +94,12 @@ export class ProductsComponent implements OnInit {
     this.prodFormSubmitted = true;
     this.prodFormApiError = { hasError: false, message: "" };
     this.prodFormSpinner = true;
+    this.toastr.info(`Loading...`, 'Info!');
     this.prodService
       .getProducts()
       .subscribe(
         resp => {
+          this.toastr.clear();
           this.products = resp.products.sort((a, b) => a.title > b.title ? 1 : -1);
           this.prodFormSpinner = false;
           this.prodFormSubmitted = false;
@@ -94,8 +109,8 @@ export class ProductsComponent implements OnInit {
           })
         },
         error => {
+          this.toastr.clear();
           const err = error.error.Message;
-          console.log(err)
           this.products = [];
           this.prodFormSpinner = false;
           this.prodFormSubmitted = false;
@@ -109,6 +124,7 @@ export class ProductsComponent implements OnInit {
     this.prodFormApiErrorCart = { hasError: false, message: "" };
     if(!this.prodQuantity[i]){
       this.prodFormApiErrorCart = { hasError: true, message: "Enter a quantity"};
+      this.toastr.error("Enter a quantity", 'Error!');
       return;
     }
     this.current = this.products.filter(item => item.id == id)[0];
@@ -122,9 +138,9 @@ export class ProductsComponent implements OnInit {
           this.prodFormSubmitted = false;
           this.prodFormApiErrorCart = { hasError: false, message: "" };
           this.prodCartFormSpinner = false;
-          this.response = resp.Message;
-          this.getCart()
           this.getProducts()
+          this.getCart()
+          this.toastr.success(`Added ${resp.quantity - resp.available_stock} ${resp.Title}(s) to cart`, 'Success!');
         },
         error => {
           this.prodFormSubmitted = false;
@@ -132,6 +148,7 @@ export class ProductsComponent implements OnInit {
           this.prodCartFormSpinner = false;
           this.getCart()
           this.getProducts()
+          this.toastr.error(`${error.error.Message || error.error.message}`, 'Error!');
         });
   }
 

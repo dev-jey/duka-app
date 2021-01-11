@@ -10,9 +10,6 @@
             <div class="login-container__right">
                 <form action="" class="login__form" (submit)="login($event)" [formGroup]="loginForm">
                     <h2>Login</h2>
-                    <div class="api-error animate__animated animate__fadeInUp" *ngIf="loginFormApiError.hasError">
-                        <img src="../../../../assets/images/alert.svg" alt=""> {{loginFormApiError.message}}
-                    </div>
                     <p>Login to your account to manage your shop</p>
                     <br>
                     <div class="login__form-attr">
@@ -37,6 +34,8 @@
                                 *ngIf="loginFormSpinner" />
                                <span *ngIf="!loginFormSpinner">LOGIN</span> </button>
                     </div>
+                    <br>
+                    <p>Are you a new user? <a routerLink="/signup" class="link">Signup</a> here.</p>
                 </form>
             </div>
 

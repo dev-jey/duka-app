@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from 'src/app/_services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-authentication-login",
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
           this.loginFormSubmitted = false;
           this.loginFormSpinner = false;
 
+          this.toastr.success("Login Successful", 'Success!');
           this.router.navigate(["shop"]);
 
           //unsubscribe
@@ -84,6 +87,8 @@ export class LoginComponent implements OnInit {
           this.loginFormSubmitted = false;
           this.loginFormSpinner = false;
           this.loginFormApiError = { hasError: true, message: error.error.Message };
+
+          this.toastr.error(error.error.Message, 'Error!');
           //unsubscribe
           if (sub) {
             sub.unsubscribe();
